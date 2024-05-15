@@ -11,7 +11,7 @@ public class UpdateProduto {
 
 		System.out.println(produto);
 
-		produto.setPrecoCompra(new BigDecimal("3.75"));
+		//produto.setPrecoCompra(new BigDecimal("3.75"));
 		ProdutoRepositorio.AtualizarProduto(produto);
 
 		Produto produto2 = ProdutoRepositorio.BuscarProdutoPorId(3);

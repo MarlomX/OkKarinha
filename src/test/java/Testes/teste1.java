@@ -1,10 +1,9 @@
 package Testes;
 
-import Telas.TelaProduto;
+import Telas.Produto.TelaProdutoAdicionar;
 
 public class teste1 {
 	public static void main(String[] args) {
-		TelaProduto tela = new TelaProduto();
-		tela.ControleEstoqueApp();
+		new TelaProdutoAdicionar();
 	}
 }
