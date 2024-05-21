@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Modelo.Produto;
@@ -20,6 +21,7 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
         criarTela();
     }
     
+    @Override
     protected void ConfigButton() {
     	super.ConfigButton();
     	
@@ -27,41 +29,30 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adicionarAoEstoque();
-                new TelaProdutoTabela();
-                frame.dispose();
             }
         });
     }
     
     private void adicionarAoEstoque() {
-        String nomeProduto = nomeProdutoField.getText();
-        int quantidade = Integer.parseInt(quantidadeField.getText());
-        BigDecimal preco = new BigDecimal(precoField.getText());
-        BigDecimal custo = new BigDecimal(custoField.getText());
-        
-        if (!produtoExistente(nomeProduto)) {
-            Produto novoProduto = new Produto(nomeProduto, quantidade, preco, custo);
-        	ProdutoRepositorio.CriarProduto(novoProduto);
-        }      
-
-        // Limpa os campos de entrada
-        nomeProdutoField.setText("");
-        quantidadeField.setText("");
-        precoField.setText("");
-        custoField.setText("");
+    	if(validaCampos()) {
+    		//busca os valores inseridos no campo de forma formatada
+		    String nomeProduto = formataNome();
+		    int quantidade = formataQuant();
+		    BigDecimal preco = formataPreco();
+		    BigDecimal custo = formataCusto();
+		   
+		    //adiciona os valores a um produto no banco de dados
+	        Produto novoProduto = new Produto(nomeProduto, quantidade, preco, custo);
+	    	ProdutoRepositorio.CriarProduto(novoProduto);
+		         
+		
+		    // Muda para a tela da tabela
+	    	new TelaProdutoTabela();
+            frame.dispose();
+    	}
     }
     
-    private boolean produtoExistente(String nomeProduto) {
-        listaProdutos = ProdutoRepositorio.BuscarTodosOsProdutos();
-    	boolean existe = false;
-        for (Produto p : listaProdutos) {
-        	if (p.getNome().equals(nomeProduto)) {
-                existe = true;
-            }
-        }
-        return existe;
-    }
-    
+    @Override
     protected void cofiguraLayout(JPanel panel) {
     	super.cofiguraLayout(panel);
     	
@@ -73,6 +64,18 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
         constraints.gridwidth = 1;
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(adicionarButton, constraints);
+    }
+    
+    @Override
+    protected boolean validaNome() {
+    	String nome = formataNome();
+	    for(Produto produto: listaProdutos) {  	
+	    	if (produto.getNome().equals(nome)) {
+	    		JOptionPane.showMessageDialog(null, "Erro: Já existe um produto com esse nome", "Erro", 0);
+	    		return false;
+	    	}
+		}
+    	return super.validaNome();
     }
 
     public static void main(String[] args) {
