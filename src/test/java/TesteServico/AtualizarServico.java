@@ -12,7 +12,7 @@ public class AtualizarServico {
 		
 		System.out.println(servico1);
 		
-		servico1.setCliente(cliente);
+		//servico1.setCliente(cliente);
 		
 		ServicoRepositorio.AtualizarServico(servico1);
 		

@@ -67,6 +67,8 @@ public class ProdutoFormulario {
 	protected JFrame criarJanela(JPanel panel) {
 		JFrame frame = new JFrame("Controle de Estoque");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setLocationRelativeTo(null);
+	    frame.setSize(800, 300); // Defina o tamanho desejado (largura x altura)
 	    frame.add(panel);
 	    frame.pack();
 	    frame.setVisible(true);
@@ -137,45 +139,53 @@ public class ProdutoFormulario {
 	}
 	
 	protected boolean camposPrenchidos() {
+		boolean result = true;
+		
 		if(nomeProdutoField.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Erro: O campo 'Nome do Produto' e de preenchimento obrigatorio", "Erro", 0);
-			return false;
+			result = false;
 		} else if(quantidadeField.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Erro: O campo 'Quantidade' e de preenchimento obrigatorio", "Erro", 0);
-			return false;
+			result = false;
 		} else if(precoField.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Erro: O campo 'Preço' e de preenchimento obrigatorio", "Erro", 0);
-			return false;
+			result = false;
 		}else if(custoField.getText().trim().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Erro: O campo 'Custo' e de preenchimento obrigatorio", "Erro", 0);
-			return false;
+			result = false;
 		}
 		
-		return true;
+		return result;
 	}
 	
 	protected boolean validaNome() {
 		String nome = formataNome();
+		boolean result = true;
 		
 		if(!nome.matches(".*[a-zA-Z].*")) {
 			JOptionPane.showMessageDialog(null, "Erro: O nome do produto tem que conter pelomenos uma letra", "Erro", 0);
-    		return false;
+    		result = false;
 		}
-	return true;
+	return result;
 	}
 	
+	@SuppressWarnings("finally")
 	protected boolean validaQuant() {
+		boolean result = true;
 		try {
 			formataQuant();
 		} catch (NumberFormatException e) {
 		    // Tratamento da exceção (por exemplo, exibir uma mensagem de erro)
 		    JOptionPane.showMessageDialog(null, "Erro: A quandtidade tem que ser um valor inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
-		    return false;
+		    result = false;
+		}finally {
+			return result;
 		}
-		return true;
 	}
 	
+	@SuppressWarnings("finally")
 	protected boolean validaPreco() {
+		boolean result = true;
 		try {
 			formataPreco();
 		} catch(NumberFormatException e) {
@@ -185,12 +195,16 @@ public class ProdutoFormulario {
 			}else {
 			    JOptionPane.showMessageDialog(null, "Erro: O campo de preço so pode ter numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
-			return false;
+			result = false;
+		} finally {
+			return result;
 		}
-		return true;
 	}
 	
+	@SuppressWarnings("finally")
 	protected boolean validaCusto() {
+		boolean result = true;
+		
 		try {
 			formataCusto();
 		} catch(NumberFormatException e) {
@@ -200,9 +214,10 @@ public class ProdutoFormulario {
 			}else {
 			    JOptionPane.showMessageDialog(null, "Erro: O campo de preço so pode ter numeros.", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
-			return false;
+			result = false;
+		} finally {
+			return result;
 		}
-		return true;
 	}
 
 }

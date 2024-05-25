@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.math.BigDecimal;
+
 public class Oferta {
 	
 	private int Id;
@@ -30,6 +32,12 @@ public class Oferta {
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	
+	public BigDecimal valorTotal() {
+		BigDecimal valorTotal = new BigDecimal(0);
+		valorTotal = this.produto.getPrecoVenda().multiply(new BigDecimal(this.Quantidade));
+		return valorTotal;
 	}
 
 	@Override
