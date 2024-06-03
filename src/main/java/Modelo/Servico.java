@@ -30,24 +30,12 @@ public class Servico {
 		return Id;
 	}
 
-	public void setId(int id) {
-		Id = id;
-	}
-
 	public Date getData() {
 		return Data;
 	}
 
-	public void setData(Date data) {
-		Data = data;
-	}
-
 	public Cliente getCliente() {
 		return Cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		Cliente = cliente;
 	}
 
 	public List<Oferta> getListaOrfeta() {
@@ -69,6 +57,17 @@ public class Servico {
 	@Override
 	public String toString() {
 		return "Servico [Id=" + Id + ", Cliente=" + Cliente + ", Data=" + Data + ", listaOrfeta=" + ListaOrfeta + "]";
+	}
+	
+	public BigDecimal valorTotal() {
+		BigDecimal valor = BigDecimal.ZERO;
+		for(Oferta oferta: ListaOrfeta) {
+			valor = valor.add(oferta.valorTotal());
+		}
+		for(Reparo reparo: ListaReparo) {
+			valor = valor.add(reparo.getPreco());
+		}
+		return valor;
 	}
 
 	public void ComprarProduto(Produto p, int quantidade) {
