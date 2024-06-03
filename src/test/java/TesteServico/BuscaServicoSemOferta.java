@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package TesteServico;
 
 import Modelo.Servico;
@@ -8,3 +9,15 @@ public static void main(String[] args) {
 	System.out.println(servico);
 }	
 }
+=======
+package TesteServico;
+
+import Modelo.Servico;
+
+public class BuscaServicoSemOferta {
+public static void main(String[] args) {
+	Servico servico = new Servico(9, null, null);
+	System.out.println(servico);
+}	
+}
+>>>>>>> 812d65e (Telas Produto)
