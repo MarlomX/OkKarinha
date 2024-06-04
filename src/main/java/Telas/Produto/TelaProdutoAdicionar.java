@@ -7,7 +7,10 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 
 import javax.swing.JButton;
+<<<<<<< HEAD
+=======
 import javax.swing.JOptionPane;
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 import javax.swing.JPanel;
 
 import Modelo.Produto;
@@ -21,7 +24,10 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
         criarTela();
     }
     
+<<<<<<< HEAD
+=======
     @Override
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
     protected void ConfigButton() {
     	super.ConfigButton();
     	
@@ -29,11 +35,46 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adicionarAoEstoque();
+<<<<<<< HEAD
+                new TelaProdutoTabela();
+                frame.dispose();
+=======
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
             }
         });
     }
     
     private void adicionarAoEstoque() {
+<<<<<<< HEAD
+        String nomeProduto = nomeProdutoField.getText();
+        int quantidade = Integer.parseInt(quantidadeField.getText());
+        BigDecimal preco = new BigDecimal(precoField.getText());
+        BigDecimal custo = new BigDecimal(custoField.getText());
+        
+        if (!produtoExistente(nomeProduto)) {
+            Produto novoProduto = new Produto(nomeProduto, quantidade, preco, custo);
+        	ProdutoRepositorio.CriarProduto(novoProduto);
+        }      
+
+        // Limpa os campos de entrada
+        nomeProdutoField.setText("");
+        quantidadeField.setText("");
+        precoField.setText("");
+        custoField.setText("");
+    }
+    
+    private boolean produtoExistente(String nomeProduto) {
+        listaProdutos = ProdutoRepositorio.BuscarTodosOsProdutos();
+    	boolean existe = false;
+        for (Produto p : listaProdutos) {
+        	if (p.getNome().equals(nomeProduto)) {
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    
+=======
     	if(validaCampos()) {
     		//busca os valores inseridos no campo de forma formatada
 		    String nomeProduto = formataNome();
@@ -53,6 +94,7 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
     }
     
     @Override
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
     protected void cofiguraLayout(JPanel panel) {
     	super.cofiguraLayout(panel);
     	
@@ -65,6 +107,8 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(adicionarButton, constraints);
     }
+<<<<<<< HEAD
+=======
     
     @Override
     protected boolean validaNome() {
@@ -77,6 +121,7 @@ public class TelaProdutoAdicionar extends ProdutoFormulario {
 		}
     	return super.validaNome();
     }
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 
     public static void main(String[] args) {
 		new TelaProdutoAdicionar();

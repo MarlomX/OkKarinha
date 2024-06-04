@@ -7,7 +7,10 @@ import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 
 import javax.swing.JButton;
+<<<<<<< HEAD
+=======
 import javax.swing.JOptionPane;
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 import javax.swing.JPanel;
 
 import Modelo.Produto;
@@ -23,7 +26,10 @@ public class TelaProdutoEditar extends ProdutoFormulario{
         criarTela();
     }
     
+<<<<<<< HEAD
+=======
     @Override
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
     protected void ConfigButton() {
     	super.ConfigButton();
     	
@@ -31,12 +37,28 @@ public class TelaProdutoEditar extends ProdutoFormulario{
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditarProduto();
+<<<<<<< HEAD
+                new TelaProdutoTabela();
+                frame.dispose();
+=======
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
             }
         });
 
     }
     
     private void EditarProduto() {
+<<<<<<< HEAD
+        String nomeProduto = nomeProdutoField.getText();
+        int quantidade = Integer.parseInt(quantidadeField.getText());
+        BigDecimal preco = new BigDecimal(precoField.getText());
+        BigDecimal custo = new BigDecimal(custoField.getText());
+        
+        produto.atualizaProduto(nomeProduto, quantidade, preco, custo);
+        ProdutoRepositorio.AtualizarProduto(produto);
+    }
+    
+=======
     	if(validaCampos()) {
     		 	String nomeProduto = nomeProdutoField.getText();
     	        int quantidade = Integer.parseInt(quantidadeField.getText());
@@ -52,6 +74,7 @@ public class TelaProdutoEditar extends ProdutoFormulario{
     }
     
     @Override
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
     protected void criarCampos(GridBagConstraints constraints, JPanel panel) {
     	super.criarCampos(constraints, panel);
     	nomeProdutoField.setText(produto.getNome());
@@ -61,7 +84,10 @@ public class TelaProdutoEditar extends ProdutoFormulario{
 
     }
     
+<<<<<<< HEAD
+=======
     @Override
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
     protected void cofiguraLayout(JPanel panel) {
     	super.cofiguraLayout(panel);
     	
@@ -74,6 +100,8 @@ public class TelaProdutoEditar extends ProdutoFormulario{
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(editarButton, constraints);
     }
+<<<<<<< HEAD
+=======
     
     @Override
     protected boolean validaNome() {
@@ -87,6 +115,7 @@ public class TelaProdutoEditar extends ProdutoFormulario{
 	    return super.validaNome();
 
     }
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 
     public static void main(String[] args) {
 		new TelaProdutoAdicionar();

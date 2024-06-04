@@ -6,18 +6,27 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
+=======
 import java.math.BigDecimal;
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+<<<<<<< HEAD
+=======
 import javax.swing.JOptionPane;
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Modelo.Produto;
+<<<<<<< HEAD
+=======
 import Repositorio.ProdutoRepositorio;
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 
 public class ProdutoFormulario {
 	protected JTextField nomeProdutoField;
@@ -36,7 +45,10 @@ public class ProdutoFormulario {
 	    precoField = new JTextField(10);
 	    custoField = new JTextField(10);
 	    voltarButton = new JButton("Voltar");
+<<<<<<< HEAD
+=======
         listaProdutos = ProdutoRepositorio.BuscarTodosOsProdutos();
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 	
 	    // Configuração do layout
 		JPanel panel = new JPanel(new GridBagLayout());
@@ -67,8 +79,11 @@ public class ProdutoFormulario {
 	protected JFrame criarJanela(JPanel panel) {
 		JFrame frame = new JFrame("Controle de Estoque");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
+=======
 	    frame.setLocationRelativeTo(null);
 	    frame.setSize(800, 300); // Defina o tamanho desejado (largura x altura)
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 	    frame.add(panel);
 	    frame.pack();
 	    frame.setVisible(true);
@@ -104,6 +119,10 @@ public class ProdutoFormulario {
 
 	    constraints.gridx = gridx + 1;
 	    panel.add(field, constraints);
+<<<<<<< HEAD
+	}
+	
+=======
 	}	
 	
 	//Codigos de formatação dos campos
@@ -217,4 +236,5 @@ public class ProdutoFormulario {
 		}
 	}
 
+>>>>>>> 9805c6cf1c9ef51e01d6cb9809c32ad0e30de7ff
 }
