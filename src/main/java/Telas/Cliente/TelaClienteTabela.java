@@ -1,10 +1,13 @@
 package Telas.Cliente;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Modelo.Cliente;
@@ -34,6 +37,16 @@ public class TelaClienteTabela extends TelaTabela{
     }
     
     @Override
+	protected void CreateTable() {
+		DefaultTableModel model = CreateModel();
+
+		table = new JTable(model);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		frame.add(scrollPane, BorderLayout.CENTER);
+	}
+    
+    @Override
     protected void AddFuncoesButtons(final JFrame frame) {
     	//Button Add
     	addButton.addActionListener(new ActionListener() {
@@ -56,19 +69,16 @@ public class TelaClienteTabela extends TelaTabela{
             }
     	});
     	
-    	//Button Delete function
-    	deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	if(itenSelecionado("Selecione um cliente")) {
-	            	String clienteCPF = String.valueOf(getIdSelecionado());
-	            	ClienteRepositorio.DeletarCliente(clienteCPF);
-	            	new TelaClienteTabela();
-	            	frame.dispose();
-            	}
-            }
-    	});
+    	super.AddFuncoesButtons(frame);
     }
+    
+    @Override
+	protected void deletaLinhaSelecionada(Object id) {
+    	String clienteCPF = String.valueOf(id);
+    	Cliente cliente = ClienteRepositorio.BuscarClientePorCPF(clienteCPF);
+    	cliente.deletaCliente();
+    	super.deletaLinhaSelecionada(id);
+	}
     
     public static void main(String[] args) {
     	new TelaClienteTabela();

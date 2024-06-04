@@ -139,23 +139,20 @@ public class ProdutoFormulario {
 	}
 	
 	protected boolean camposPrenchidos() {
-		boolean result = true;
-		
-		if(nomeProdutoField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Nome do Produto' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		} else if(quantidadeField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Quantidade' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		} else if(precoField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Preço' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		}else if(custoField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Custo' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		}
-		
-		return result;
+		String[][] campos = {
+	            {nomeProdutoField.getText().trim(), "Nome do Produto"},
+	            {quantidadeField.getText().trim(), "Quantidade"},
+	            {precoField.getText().trim(), "Preço"},
+	            {custoField.getText().trim(), "Custo"}
+	        };
+
+	        for (String[] campo : campos) {
+	            if (campo[0].isEmpty()) {
+	                JOptionPane.showMessageDialog(null, "Erro: O campo '" + campo[1] + "' é de preenchimento obrigatório", "Erro", JOptionPane.ERROR_MESSAGE);
+	                return false;
+	            }
+	        }
+	        return true;
 	}
 	
 	protected boolean validaNome() {
@@ -163,7 +160,7 @@ public class ProdutoFormulario {
 		boolean result = true;
 		
 		if(!nome.matches(".*[a-zA-Z].*")) {
-			JOptionPane.showMessageDialog(null, "Erro: O nome do produto tem que conter pelomenos uma letra", "Erro", 0);
+			JOptionPane.showMessageDialog(null, "Erro: O nome do produto tem que conter pelo menos uma letra", "Erro", 0);
     		result = false;
 		}
 	return result;
@@ -176,7 +173,7 @@ public class ProdutoFormulario {
 			formataQuant();
 		} catch (NumberFormatException e) {
 		    // Tratamento da exceção (por exemplo, exibir uma mensagem de erro)
-		    JOptionPane.showMessageDialog(null, "Erro: A quandtidade tem que ser um valor inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
+		    JOptionPane.showMessageDialog(null, "Erro: A quantidade tem que ser um valor inteiro.", "Erro", JOptionPane.ERROR_MESSAGE);
 		    result = false;
 		}finally {
 			return result;

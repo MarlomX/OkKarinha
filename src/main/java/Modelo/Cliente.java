@@ -1,5 +1,10 @@
 package Modelo;
 
+import java.util.List;
+
+import Repositorio.ClienteRepositorio;
+import Repositorio.ServicoRepositorio;
+
 public class Cliente {
 
 	private String CPF;
@@ -31,6 +36,16 @@ public class Cliente {
 		Nome = nome;
 		Telefone = telefone;
 		Email = email;
+	}
+	
+	public void deletaCliente() {
+		List<Servico> listaServico = ServicoRepositorio.BuscarTodosOsServicos();
+		for(Servico servico : listaServico) {
+			if(servico.getCliente().getCPF().equals(this.CPF)) {
+				servico.deletarServico();
+			}
+		}
+		ClienteRepositorio.DeletarCliente(this.CPF);
 	}
 	
 	@Override

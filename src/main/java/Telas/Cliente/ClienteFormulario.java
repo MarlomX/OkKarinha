@@ -140,23 +140,21 @@ public class ClienteFormulario {
 	}
 	
 	protected boolean camposPrenchidos() {
-		boolean result = true;
 		
-		if(nomeClienteField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Nome' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		} else if(cpfField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'CPF' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		} else if(telefoneField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Telefone' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		}else if(emailField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Erro: O campo 'Email' e de preenchimento obrigatorio", "Erro", 0);
-			result = false;
-		}
-		
-		return result;
+		String[][] campos = {
+	            {nomeClienteField.getText().trim(), "Nome"},
+	            {cpfField.getText().trim(), "CPF"},
+	            {telefoneField.getText().trim(), "Telefone"},
+	            {emailField.getText().trim(), "Email"}
+	        };
+
+	        for (String[] campo : campos) {
+	            if (campo[0].isEmpty()) {
+	                JOptionPane.showMessageDialog(null, "Erro: O campo '" + campo[1] + "' é de preenchimento obrigatório", "Erro", JOptionPane.ERROR_MESSAGE);
+	                return false;
+	            }
+	        }
+	        return true;
 	}
 	
 	protected boolean validaNome() {

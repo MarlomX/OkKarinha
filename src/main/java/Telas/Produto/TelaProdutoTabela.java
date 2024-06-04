@@ -58,19 +58,19 @@ public class TelaProdutoTabela extends TelaTabela{
             	}
             }
         });
-    	//Button Delete function
-    	deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	if(itenSelecionado("Selecione um produto")) {
-	            	int produtoId =((Integer) getIdSelecionado()).intValue();
-	            	ProdutoRepositorio.DeletarProduto(produtoId);
-	            	new TelaProdutoTabela();
-	            	frame.dispose();
-            	}
-            }
-    	});
+    	
+    	super.AddFuncoesButtons(frame);
     }   
+    
+    @Override
+    protected void deletaLinhaSelecionada(Object id) {
+    	// deleta produto do banco de dados
+    	int produtoId =((int) id);
+    	Produto produto = ProdutoRepositorio.BuscarProdutoPorId(produtoId);
+    	produto.deletarProduto();
+    	//deleta a linha da tabela
+    	super.deletaLinhaSelecionada(id);
+    }
     
     public static void main(String[] args) {
     	new TelaProdutoTabela();

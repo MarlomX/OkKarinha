@@ -20,6 +20,15 @@ public class Reparo {
 		Mecanico = mecanico;
 		Modelo = modelo;
 	}
+	
+	public Reparo(BigDecimal preco, String placa, String descricao, String mecanico, String modelo) {
+		super();
+		Preco = preco;
+		Placa = placa;
+		Descricao = descricao;
+		Mecanico = mecanico;
+		Modelo = modelo;
+	}
 
 	public int getId() {
 		return Id;

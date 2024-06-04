@@ -7,6 +7,7 @@ import java.util.List;
 
 import Repositorio.OfertaRepositorio;
 import Repositorio.ReparoRepositorio;
+import Repositorio.ServicoRepositorio;
 
 public class Servico {
 
@@ -24,6 +25,13 @@ public class Servico {
 		ListaOrfeta = OfertaRepositorio.BuscarTodasAsOfertasDoServico(id);
 		ListaReparo = ReparoRepositorio.BuscarTodosOsReparosDoServico(id);
 	}
+	
+	public Servico(Modelo.Cliente cliente, Date data) {
+		super();
+		Id = 0;
+		Cliente = cliente;
+		Data = data;
+	}
 
 	public int getId() {
 		return Id;
@@ -32,9 +40,17 @@ public class Servico {
 	public Date getData() {
 		return Data;
 	}
+	
+	public void setData(Date data) {
+		this.Data = data;
+	}
 
 	public Cliente getCliente() {
 		return Cliente;
+	}
+	
+	public void setCliente(Cliente cliente) {
+		this.Cliente = cliente;
 	}
 
 	public List<Oferta> getListaOrfeta() {
@@ -78,5 +94,23 @@ public class Servico {
 	public void FazerReparo(BigDecimal preco, String placa, String descricao, String mecanico, String modelo) {
 		int ReparoId = ReparoRepositorio.CriarReparo(this, preco, placa, descricao, mecanico, modelo);
 		this.ListaReparo.add(ReparoRepositorio.BuscarReparoPorId(ReparoId));
+	}
+	
+	public void deletarOferta(int ofertaId) {
+		OfertaRepositorio.DeletarOferta(ofertaId);
+	}
+	
+	public void deletarReparo(int reparoId) {
+		ReparoRepositorio.DeletarReparo(reparoId);
+	}
+	
+	public void deletarServico() {
+		for(Oferta oferta: ListaOrfeta) {
+			deletarOferta(oferta.getId());
+		}
+		for(Reparo reparo: ListaReparo) {
+			deletarReparo(reparo.getId());
+		}
+		ServicoRepositorio.DeletarServico(Id);
 	}
 }

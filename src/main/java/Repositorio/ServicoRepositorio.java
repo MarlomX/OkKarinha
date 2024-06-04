@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,22 +16,30 @@ import Modelo.Servico;
 public class ServicoRepositorio {
 
 	// Adiciona um novo serviço a tabela servico apartir de objeto Servico
-	public static void CriarServico(Servico s) {
+	public static Servico CriarServico(Servico s) {
 		Connection con = ConectionFabric.getConection();
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 
 		try {
-			stmt = con.prepareStatement("INSERT INTO servico (Cliente_CPF, Data) VALUES(?, ?)");
+			stmt = con.prepareStatement("INSERT INTO servico (Cliente_CPF, Data) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, s.getCliente().getCPF());
 			stmt.setDate(2, s.getData());
 			stmt.executeUpdate();
+			
+			rs = stmt.getGeneratedKeys();
+	        if (rs.next()) {
+	            return BuscarServicoPorId((int) rs.getLong(1));
+	            }
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro ao tentar criar uma linha na tabela sevico: " + e);
 		} finally {
 			{
-				ConectionFabric.closeConection(con, stmt);
+				ConectionFabric.closeConection(con, stmt, rs);
 			}
 		}
+		return s;
 	}
 
 	// Busca um servico pelo Id e devolve em um objeto servico

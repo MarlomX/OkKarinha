@@ -15,6 +15,13 @@ public class Oferta {
 		this.produto = produto;
 	}
 	
+	public Oferta(int quantidade, Produto produto) {
+		super();
+		Id = 0;
+		Quantidade = quantidade;
+		this.produto = produto;
+	}
+	
 	public int getId() {
 		return Id;
 	}

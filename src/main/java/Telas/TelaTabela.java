@@ -2,6 +2,8 @@ package Telas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 public class TelaTabela {
 	protected JButton addButton;
@@ -39,6 +43,12 @@ public class TelaTabela {
 		DefaultTableModel model = CreateModel();
 
 		table = new JTable(model);
+		
+        TableColumnModel columnModel = this.table.getColumnModel();
+		TableColumn hiddenColumn = columnModel.getColumn(0);
+		hiddenColumn.setMinWidth(0);
+		hiddenColumn.setMaxWidth(0);
+		hiddenColumn.setPreferredWidth(0);
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.add(scrollPane, BorderLayout.CENTER);
@@ -69,6 +79,24 @@ public class TelaTabela {
 	}
 
 	protected void AddFuncoesButtons(final JFrame frame) {
+    	//botão deletar
+    	deleteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if( itenSelecionado("Selecione um servico para deletar") )
+				deletaLinhaSelecionada(getIdSelecionado());
+			}
+		});
+    	
+    	backButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new TelaMenu();
+				frame.dispose();
+				
+			}
+		});
 	}
 
 	protected boolean itenSelecionado(String menssagem){
@@ -85,5 +113,11 @@ public class TelaTabela {
 		Object produtoId = table.getValueAt(linhaSelecionada, 0);
 		return produtoId;
 
+	}
+	
+	protected void deletaLinhaSelecionada(Object id) {
+		int linhaSelecionada = table.getSelectedRow();
+    	DefaultTableModel model = (DefaultTableModel)table.getModel();
+    	model.removeRow(linhaSelecionada);
 	}
 }

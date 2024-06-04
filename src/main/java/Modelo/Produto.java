@@ -1,6 +1,10 @@
 package Modelo;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import Repositorio.OfertaRepositorio;
+import Repositorio.ProdutoRepositorio;
 
 public class Produto {
 	
@@ -71,6 +75,14 @@ public class Produto {
 		this.quantEstoque = quantEstoque;
 		this.precoVenda = precoVenda;
 		this.precoCompra  = precoCompra;
+	}
+	
+	public void deletarProduto() {
+		List<Oferta> listaOferta = OfertaRepositorio.BuscarTodasAsOfertasDoProduto(this.id);
+		for(Oferta oferta: listaOferta) {
+			OfertaRepositorio.DeletarOferta(oferta.getId());
+		}
+		ProdutoRepositorio.DeletarProduto(this.id);
 	}
 	
 	//to string

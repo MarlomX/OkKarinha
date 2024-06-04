@@ -82,6 +82,23 @@ public class OfertaRepositorio {
 		}
 	}
 
+	public static List<Oferta> BuscarTodasAsOfertasDoProduto(int idP) {
+		Connection con = ConectionFabric.getConection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT * FROM relacao_servico_produto WHERE Produto_ID = ?");
+			stmt.setInt(1, idP);
+			rs = stmt.executeQuery();
+			return CriarObjetoOrfeta(rs);
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao buscar valores na tabela relacao_servico_produto: " + e);
+		} finally {
+			ConectionFabric.closeConection(con, stmt, rs);
+		}
+	}
+	
 	private static List<Oferta> CriarObjetoOrfeta(ResultSet rs) {
 		try {
 			List<Oferta> lista = new ArrayList<>();
